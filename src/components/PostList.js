@@ -1,9 +1,8 @@
-import React from 'react';
+import React ,{Fragment} from 'react';
+import Post from './Post'
 
-function PostList() {
-    return (
-        <div>PostList</div>
-    )
+function PostList({posts}) {
+    return posts.map((post, i) => (<Post key={i} {...post}/> ))
 }
 
 export default PostList;
