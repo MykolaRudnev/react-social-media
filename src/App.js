@@ -1,13 +1,16 @@
 import React, { useState }   from 'react';
 import Login from './components/Login'
+import Header from './components/Header'
 function App() {
-    const [user, setUser] = useState('');
+    const [user, setUser] = useState('eed');
 
     if(!user){
         return <Login setUser={setUser} />
     }
     return (
-        <div>app</div>
+        <>
+        <Header user={user} setUser={setUser}/>
+        </>
     )
 }
 
