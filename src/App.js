@@ -1,16 +1,17 @@
-import React, { useState, useEffect, useCallback }   from 'react';
+import React, { useState, useEffect, useCallback, createContext }   from 'react';
 import Login from './components/Login'
 import Header from './components/Header'
 import CreatePost from './components/CreatePost'
 import PostList from './components/PostList'
 
-const functionCount = new Set();
+
+export const UserContext = createContext();
 
 
 function App() {
     const [user, setUser] = useState('eed');
     const [posts, setPosts] = useState([]);
-    const [count, setCount] = useState(0);
+
 
     useEffect(() => {
         document.title= user ? `${user}'s Feed`: 'Please login';
@@ -21,20 +22,17 @@ function App() {
 
     }, [posts]);
 
-    functionCount.add(handleAddPost);
-    console.log(functionCount);
+
 
     if(!user){
         return <Login setUser={setUser} />
     }
     return (
-        <>
+        <UserContext.Provider value={user}>
         <Header user={user} setUser={setUser}/>
         <CreatePost  user={user}  handleAddPost={handleAddPost}/>
-        <PostList posts={posts}/>
-        <button onClick={() => setCount(prev => prev + 1)}>{count} +</button>
-   
-        </>
+        <PostList  posts={posts}/>
+        </UserContext.Provider>
     );
 }
 
