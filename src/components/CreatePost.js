@@ -3,7 +3,7 @@ import React, { useState, useRef, useContext } from 'react';
 import {PostContext} from '../App'
 
 function CreatePost({user}) {
-    const {dispatch} = useContext(PostContext)
+    const {dispatch} = useContext(PostContext);
     const [content, setContent] = useState('');
     const [image, setImage] = useState(null);
     const imageInputRef = useRef();
@@ -11,7 +11,7 @@ function CreatePost({user}) {
 
     function handleSubmit(event) {
         event.preventDefault();
-        const post = {content, image, user};
+        const post = {content, image, user, id: Date.now()};
         dispatch({ type: "ADD_POST", payload:{ post } })
         // handleAddPost(post);
         setContent('')
